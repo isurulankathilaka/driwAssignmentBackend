@@ -39,16 +39,8 @@ public class ProductDao {
     }
 
     public List<Product> findAll() {
-
-        List<Product> productList = new ArrayList<>();
-
-        namedParameterJdbcTemplate.query("SELECT * FROM " + Constants.TABLE_PRODUCT, resultSet -> {
-            Product product = new Product();
-            product.setProductId(resultSet.getInt(Constants.COLUMN_PRODUCT_ID));
-            productList.add(product);
-
-        });
-
-        return productList;
+        return namedParameterJdbcTemplate.query(
+                "SELECT * FROM " + Constants.TABLE_PRODUCT,
+                new ProductMapper());
     }
 }

@@ -26,6 +26,10 @@ public class ProductService {
 
     HashMap<Integer, Product> productHashMap = new HashMap<>();
 
+    public List<Product> getAllProducts() {
+        return productDao.findAll();
+    }
+
     /**
      * @param id
      * @param quantity

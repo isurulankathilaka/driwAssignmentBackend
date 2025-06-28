@@ -2,6 +2,7 @@ package com.driw.priceCalculator.demo.controller;
 
 
 import com.driw.priceCalculator.demo.dto.ProductPriceDto;
+import com.driw.priceCalculator.demo.model.Product;
 import com.driw.priceCalculator.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,18 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+    @CrossOrigin
+    @RequestMapping(path = "all", method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+
+        if (!products.isEmpty()) {
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @CrossOrigin
     @RequestMapping(path = "priceEngine", method = RequestMethod.GET)
